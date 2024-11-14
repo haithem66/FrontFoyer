@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { chambre } from './Chambre';
+import { foyer } from './Foyer';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +9,17 @@ import { chambre } from './Chambre';
 export class NomDuServiceService {
 
  
-  readonly API_URL = 'http://192.168.50.4:8089/tpfoyer/chambre';
+  readonly API_URL = 'http://192.168.33.10:8082/tpFoyer17/api/foyers';
 
   constructor(private httpClient: HttpClient) { }
-  getAllchambre() {
-    return this.httpClient.get(`${this.API_URL}/retrieve-all-chambres`)
+  getAllfoyer() {
+    return this.httpClient.get(`${this.API_URL}/retrieveAllFoyers`)
   }
-  addchambre(chambre : any) {
-    return this.httpClient.post(`${this.API_URL}/add-chambre`, chambre)
+  addfoyer(foyer : any) {
+    return this.httpClient.post(`${this.API_URL}/addFoyer`, foyer)
   }
-  editchambre(chambre : any){
-    return this.httpClient.put(`${this.API_URL}/update-chambre`, chambre)
+  editfoyer(foyer : any){
+    return this.httpClient.put(`${this.API_URL}/update-foyer`, foyer)
   }
 
 

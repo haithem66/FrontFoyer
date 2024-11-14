@@ -1,66 +1,55 @@
-<div class="row">
-  <div class="col-md-11" style="margin-left: 20px">
-    <h3 style="margin-top: 20px">List chambre </h3>
-    <hr>
-    <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1,null)">Add new chambre</button>
-    <br><br>
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>idChambre</th>
-        <th>numeroChambre</th>
-        <th>typeC</th>
-        <th>Disponible</th>
-      </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor='let p of listchambres'>
-          <td>{{p.idChambre}}</td>
-          <td>{{p.numeroChambre}}</td>
-          <td>{{p.typeC}}</td>
-          <td>{{p.disponible}}</td>
-      </tr>
-      </tbody>
-    </table>
+<div class="row" style="margin-left: 20px">
+  <h3 style="margin-top: 20px">List Foyer</h3>
+  <hr>
+  <button class="btn btn-round btn-sm btn-primary" (click)="open(mymodal1, null)">Add New Foyer</button>
+  <br><br>
 
+  <!-- Card container with custom colors -->
+  <div class="row">
+    <div class="col-md-4" *ngFor="let p of listfoyers">
+      <div class="card text-white bg-info mb-4"> <!-- Color class for card background -->
+        <div class="card-header bg-dark"> <!-- Dark header for contrast -->
+          <h5 class="card-title">Foyer ID: {{ p.idFoyer }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <strong>Nom Foyer:</strong> {{ p.nomFoyer }}<br>
+            <strong>Capacité Foyer:</strong> {{ p.capaciteFoyer }}
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Modal for adding a new foyer with styled buttons -->
 <ng-template #mymodal1 let-modal1>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add new chambre</h4>
+    <h4 class="modal-title" id="modal-basic-title">Add New Foyer</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal1.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
     <form>
       <div class="mb-3">
-        <label for="chambre-numeroChambre">numeroChambre</label>
+        <label for="foyer-nomFoyer">Nom Foyer</label>
         <div class="input-group">
-          <input id="chambre-numeroChambre" class="form-control" type="number" placeholder="numeroChambre"
-                 [(ngModel)]="chambre.numeroChambre"
-                 [ngModelOptions]="{standalone : true}"></div>
-      </div>
-      <div class="mb-3">
-        <label for="chambre-typeC">typeC</label>
-        <div class="input-group">
-          <input id="chambre-typeC" class="form-control" type="text" placeholder="typeC"
-                 [(ngModel)]="chambre.typeC"
+          <input id="foyer-nomFoyer" class="form-control" type="text" placeholder="Nom Foyer"
+                 [(ngModel)]="foyer.nomFoyer"
                  [ngModelOptions]="{standalone : true}">
-          </div>
+        </div>
       </div>
       <div class="mb-3">
-        <label for="chambre-disponible">Disponible</label>
+        <label for="foyer-capaciteFoyer">Capacité Foyer</label>
         <div class="input-group">
-            <input id="chambre-disponible" class="form-check-input" type="checkbox" 
-                   [(ngModel)]="chambre.disponible"
-                   [ngModelOptions]="{standalone : true}">
+          <input id="foyer-capaciteFoyer" class="form-control" type="number" placeholder="Capacité Foyer"
+                 [(ngModel)]="foyer.capaciteFoyer"
+                 [ngModelOptions]="{standalone : true}">
         </div>
-    </div>
+      </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="addchambre(chambre)"
-            (click)="modal1.close('Save click')">Add
-    </button>
+    <button type="button" class="btn btn-success" (click)="addfoyer(foyer); modal1.close('Save click')">Add</button>
     <button type="button" class="btn btn-danger" (click)="modal1.close('Save click')">Cancel</button>
   </div>
 </ng-template>

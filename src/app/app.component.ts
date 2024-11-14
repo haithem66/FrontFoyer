@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NomDuServiceService } from './nom-du-service.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { chambre } from './Chambre';
+import { foyer } from './Foyer';
 
 @Component({
   selector: 'app-root',
@@ -9,47 +9,46 @@ import { chambre } from './Chambre';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'tpchambreFront';
+  title = 'tpfoyerFront';
 
   form: boolean = false;
   closeResult!: string;
-  listchambres: any;
-  chambre!:any;
+  listfoyers: any;
+  foyer!:any;
 
-  constructor(private chambreService: NomDuServiceService, private modalService: NgbModal ) { }
+  constructor(private foyerService: NomDuServiceService, private modalService: NgbModal ) { }
 
   ngOnInit(): void {
-    this.getAllchambre();
-    console.log(this.listchambres)
-    this.chambre={
-      idChambre : null,
-      numeroChambre: null,
-      typeC:null,
-      disponible:null
+    this.getAllfoyer();
+    console.log(this.listfoyers)
+    this.foyer={
+      idFoyer : null,
+      nomFoyer: null,
+      capaciteFoyer:null
     }
   }
 
-  getAllchambre(){
-    return this.chambreService.getAllchambre().subscribe(res=>{
-      this.listchambres = res;
+  getAllfoyer(){
+    return this.foyerService.getAllfoyer().subscribe(res=>{
+      this.listfoyers = res;
     });
   }
-  addchambre(c: any) {
-    this.chambreService.addchambre(c).subscribe(() => {
-      this.getAllchambre();
+  addfoyer(c: any) {
+    this.foyerService.addfoyer(c).subscribe(() => {
+      this.getAllfoyer();
       this.form = false;
     });
   }
 
-  editchambre(chambre: chambre) {
-    this.chambreService.editchambre(chambre).subscribe();
+  editfoyer(foyer: foyer) {
+    this.foyerService.editfoyer(foyer).subscribe();
   }
 
   open(content: any, action: any) {
     if (action != null)
-      this.chambre = action
+      this.foyer = action
     else
-      this.chambre = new chambre();
+      this.foyer = new foyer();
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
